@@ -2,30 +2,37 @@ package com.sqa.ao.properties.parts;
 
 import java.util.Properties;
 
+import com.sqa.ao.utils.Helper;
+
 public class Part {
 	private boolean isWaterProof;
 	private double marketPrice;
 	private int partId;
 	private String partName;
 	char partRating;
-	Properties props;
 
 	public Part() {
-		super();
-		this.isWaterProof = isWaterProof;
-		this.marketPrice = marketPrice;
-		this.partId = partId;
-		this.partName = partName;
-		this.partRating = partRating;
+		Properties props = Helper.loadProperties("default-parts.config");
+		this.setWaterProof(Boolean.parseBoolean(props.getProperty("isWaterproof")));
+		this.setPartId(Integer.parseInt(props.getProperty("partId")));
+		this.setPartName(props.getProperty("partName"));
+		this.setMarketPrice(Double.parseDouble(props.getProperty("marketPrice")));
+		this.setPartRating(props.getProperty("partRating").charAt(0));
 	}
 
 	public Part(boolean isWaterProof, double marketPrice, int partId, String partName, char partRating) {
-		super();
 		this.isWaterProof = isWaterProof;
 		this.marketPrice = marketPrice;
 		this.partId = partId;
 		this.partName = partName;
 		this.partRating = partRating;
+		Properties props = new Properties();
+		props.setProperty("isWaterProof", Boolean.toString(this.isWaterProof()));
+		props.setProperty("marketPrice", Double.toHexString(this.getMarketPrice()));
+		props.setProperty("partId", Integer.toString(this.getPartId()));
+		props.setProperty("partName", this.getPartName());
+		props.setProperty("partRating", Character.toString(this.getPartRating()));
+		Helper.saveProperties("Saved-Properties", props);
 	}
 
 	/**
@@ -54,13 +61,6 @@ public class Part {
 	 */
 	public char getPartRating() {
 		return partRating;
-	}
-
-	/**
-	 * @return the props
-	 */
-	public Properties getProps() {
-		return props;
 	}
 
 	/**
@@ -103,14 +103,6 @@ public class Part {
 	}
 
 	/**
-	 * @param props
-	 *            the props to set
-	 */
-	public void setProps(Properties props) {
-		this.props = props;
-	}
-
-	/**
 	 * @param isWaterProof
 	 *            the isWaterProof to set
 	 */
@@ -124,9 +116,7 @@ public class Part {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Part [props=");
-		builder.append(props);
-		builder.append(", isWaterProof=");
+		builder.append("Part [isWaterProof=");
 		builder.append(isWaterProof);
 		builder.append(", marketPrice=");
 		builder.append(marketPrice);

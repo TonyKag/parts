@@ -1,0 +1,7 @@
+#Properties File - AO
+#Wed Oct 14 22:06:59 PDT 2015
+partName=Car Part
+marketPrice=0x1.9p7
+isWaterProof=false
+partRating=F
+partId=110
