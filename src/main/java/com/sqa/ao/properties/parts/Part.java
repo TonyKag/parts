@@ -1,11 +1,14 @@
 package com.sqa.ao.properties.parts;
 
+import java.util.Properties;
+
 public class Part {
 	private boolean isWaterProof;
 	private double marketPrice;
 	private int partId;
 	private String partName;
 	char partRating;
+	Properties props;
 
 	public Part() {
 		super();
@@ -54,6 +57,13 @@ public class Part {
 	}
 
 	/**
+	 * @return the props
+	 */
+	public Properties getProps() {
+		return props;
+	}
+
+	/**
 	 * @return the isWaterProof
 	 */
 	public boolean isWaterProof() {
@@ -93,6 +103,14 @@ public class Part {
 	}
 
 	/**
+	 * @param props
+	 *            the props to set
+	 */
+	public void setProps(Properties props) {
+		this.props = props;
+	}
+
+	/**
 	 * @param isWaterProof
 	 *            the isWaterProof to set
 	 */
@@ -106,7 +124,9 @@ public class Part {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Part [isWaterProof=");
+		builder.append("Part [props=");
+		builder.append(props);
+		builder.append(", isWaterProof=");
 		builder.append(isWaterProof);
 		builder.append(", marketPrice=");
 		builder.append(marketPrice);
